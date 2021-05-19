@@ -35,7 +35,6 @@ public class ConferenceController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public MessageResponse createConference(@RequestBody ConferenceRequest conference) {
-        System.out.println(conference);
         log.trace("received conference creation request={}", conference);
         DateTimeFormatter dtf = DateTimeFormat.forPattern("MM/DD/YYYY HH:mm:ss");
         scheduler.setConferenceName(conference.getConferenceName());
@@ -48,7 +47,6 @@ public class ConferenceController {
             bf.write(conference.getThirdPhaseDeadline() + "\n");
             bf.close();
             log.trace("created scheduler={}", scheduler);
-            System.out.println(scheduler);
             return new MessageResponse("true");
         } catch (IOException e) {
             e.printStackTrace();
